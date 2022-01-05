@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-// input이 여러개 일때 event객체를 활용하여 state를 설정하면 쉽게 해결할 수 있음
-
 class EventPractice extends Component {
   state = {
     username: '',
@@ -13,7 +11,6 @@ class EventPractice extends Component {
       [e.target.name]: e.target.value, // ✨
     });
   };
-  // 👉🏻 객체 안에서 key를 []로 감싸면 그 안에 넣은 레퍼런스가 가리키는 실제 값이 key값으로 사용됩니다.
 
   handleClick = () => {
     alert(`${this.state.username}: ${this.state.message}`);
@@ -21,6 +18,12 @@ class EventPractice extends Component {
       username: '',
       message: '',
     });
+  };
+
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.handleClick();
+    }
   };
 
   render() {
@@ -40,6 +43,7 @@ class EventPractice extends Component {
           placeholder="아무거나 입력해 보세요"
           value={this.state.message}
           onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
         />
         <button onClick={this.handleClick}>확인</button>
       </div>
