@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 
-// 생선자 메서드에서 메서드바인딩을 하는 것이 정석이지만,
-// 좀 더 간단하게 화살표 함수 형태로 메서드를 정의할 수도 있다 😆
+// input이 여러개 일때 event객체를 활용하여 state를 설정하면 쉽게 해결할 수 있음
 
 class EventPractice extends Component {
   state = {
+    username: '',
     message: '',
   };
 
   handleChange = (e) => {
     this.setState({
-      message: e.target.value,
+      [e.target.name]: e.target.value, // ✨
     });
   };
+  // 👉🏻 객체 안에서 key를 []로 감싸면 그 안에 넣은 레퍼런스가 가리키는 실제 값이 key값으로 사용됩니다.
 
   handleClick = () => {
-    alert(this.state.message);
+    alert(`${this.state.username}: ${this.state.message}`);
     this.setState({
+      username: '',
       message: '',
     });
   };
@@ -25,6 +27,13 @@ class EventPractice extends Component {
     return (
       <div>
         <h1>이벤트 연습</h1>
+        <input
+          type="text"
+          name="username"
+          placeholder="사용자명"
+          value={this.state.username}
+          onChange={this.handleChange}
+        />
         <input
           type="text"
           name="message"
