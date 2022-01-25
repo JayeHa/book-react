@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import ErrorBoundary from './7-lifecycle-method/ErrorBoundary';
 import LifeCycleSample from './7-lifecycle-method/LifeCycleSample';
 import './App.css';
 
@@ -20,7 +21,9 @@ class App extends Component {
     return (
       <>
         <button onClick={this.handleClick}>랜덤 색상</button>
-        <LifeCycleSample color={this.state.color} />
+        <ErrorBoundary>
+          <LifeCycleSample color={this.state.color} />
+        </ErrorBoundary>
       </>
     );
   }
