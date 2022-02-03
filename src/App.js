@@ -1,8 +1,8 @@
 import React from 'react';
-import Average from './8-hooks/Average';
+import Info from './8-hooks/info';
 
 const App = () => {
-  return <Average />;
+  return <Info />;
 };
 
 export default App;
