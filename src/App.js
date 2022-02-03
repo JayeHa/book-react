@@ -1,8 +1,7 @@
 import React from 'react';
-import Info from './8-hooks/info';
 
 const App = () => {
-  return <Info />;
+  return <div>Todo App을 만들자!</div>;
 };
 
 export default App;
