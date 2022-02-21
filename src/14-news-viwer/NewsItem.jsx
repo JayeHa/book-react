@@ -1,4 +1,4 @@
-import styled from 'styled-compoenets';
+import styled from 'styled-components';
 
 const NewsItemBlock = styled.div`
   display: flex;
