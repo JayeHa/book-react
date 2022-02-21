@@ -1,42 +1,27 @@
-import { Link, Route, Switch } from 'react-router-dom';
-import About from './13-spa/About';
-import HistorySample from './13-spa/HistorySample';
-import Home from './13-spa/Home';
-import Profiles from './13-spa/Profiles';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const App = () => {
+  const [data, setData] = useState(null);
+  const onClick = () => {
+    axios
+      .get('https://jsonplaceholder.typicode.com/todos/1')
+      .then((response) => {
+        setData(response.data);
+      });
+  };
   return (
     <div>
-      <ul>
-        <li>
-          <Link to="/">홈</Link>
-        </li>
-        <li>
-          <Link to="/about">소개</Link>
-        </li>
-        <li>
-          <Link to="/profiles">프로필</Link>
-        </li>
-        <li>
-          <Link to="/history">History 예제</Link>
-        </li>
-      </ul>
-      <hr />
-      <Switch>
-        <Route path="/" component={Home} exact={true} />
-        <Route path={['/about', '/info']} component={About} />
-        <Route path="/profiles" component={Profiles} />
-        <Route path="/history" component={HistorySample} />
-        <Route
-          //  path를 따로 정의하지 않으면 모든 상황에 렌더링됨
-          render={({ location }) => (
-            <div>
-              <h2>이 페이지는 존재하지 않습니다:</h2>
-              <p>{location.pathname}</p>
-            </div>
-          )}
+      <div>
+        <button onClick={onClick}>불러오기</button>
+      </div>
+      {data && (
+        <textarea
+          rows={7}
+          value={JSON.stringify(data, null, 2)}
+          readOnly={true}
         />
-      </Switch>
+      )}
     </div>
   );
 };
