@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from '../../node_modules/axios/index';
+import axios from '../../../node_modules/axios/index';
 import NewsItem from './NewsItem';
 
 const NewsListBlock = styled.div`

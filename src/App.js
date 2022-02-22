@@ -1,16 +1,8 @@
-import React, { useCallback, useState } from 'react';
-import Categories from './14-news-viwer/Categories';
-import NewsList from './14-news-viwer/NewsList';
+import { Route } from 'react-router-dom';
+import NewsPage from './14-news-viwer/pages/NewsPage';
 
 const App = () => {
-  const [category, setCategory] = useState('all');
-  const onSelect = useCallback((category) => setCategory(category), []);
-  return (
-    <>
-      <Categories category={category} onSelect={onSelect} />
-      <NewsList category={category} />
-    </>
-  );
+  return <Route path="/:category?" component={NewsPage} />;
 };
 
 export default App;
