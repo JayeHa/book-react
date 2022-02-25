@@ -1,10 +1,10 @@
-import Counter from './17-react-redux-tutorial/components/Counter';
 import Todos from './17-react-redux-tutorial/components/Todos';
+import CounterContainer from './17-react-redux-tutorial/containers/CounterContainer';
 
 const App = () => {
   return (
     <div>
-      <Counter number={0} />
+      <CounterContainer />
       <hr />
       <Todos />
     </div>
