@@ -1,15 +1,13 @@
-import ColorBox from './15-context-api/components/ColorBox';
-import { ColorProvider } from './15-context-api/contexts/color';
-import SelectColors from './15-context-api/components/SelectColors';
+import Counter from './17-react-redux-tutorial/components/Counter';
+import Todos from './17-react-redux-tutorial/components/Todos';
 
 const App = () => {
   return (
-    <ColorProvider>
-      <div>
-        <SelectColors />
-        <ColorBox />
-      </div>
-    </ColorProvider>
+    <div>
+      <Counter number={0} />
+      <hr />
+      <Todos />
+    </div>
   );
 };
 
