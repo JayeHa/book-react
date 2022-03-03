@@ -1,9 +1,9 @@
-import CounterContainer from './18-redux-middleware/containers/CounterContainer';
+import SampleContainer from './18-redux-middleware/containers/SampleContainer';
 
 const App = () => {
   return (
     <div>
-      <CounterContainer />
+      <SampleContainer />
     </div>
   );
 };
