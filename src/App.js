@@ -1,10 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import notify from './19-code-spliting/notify';
 
 function App() {
   const onClick = () => {
-    notify();
+    import('./19-code-spliting/notify').then((result) => result.default());
   };
   return (
     <div className="App">
