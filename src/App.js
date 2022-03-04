@@ -1,18 +1,31 @@
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  const onClick = () => {
-    import('./19-code-spliting/notify').then((result) => result.default());
+class App extends Component {
+  state = {
+    SplitMe: null,
   };
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p onClick={onClick}>Hello React!</p>
-      </header>
-    </div>
-  );
+
+  handleClick = async () => {
+    const loadeModule = await import('./19-code-spliting/SplitMe');
+    this.setState({
+      SplitMe: loadeModule.default,
+    });
+  };
+
+  render() {
+    const { SplitMe } = this.state;
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p onClick={this.handleClick}>Hello React!</p>
+          {SplitMe && <SplitMe />}
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
