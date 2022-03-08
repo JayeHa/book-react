@@ -20,7 +20,7 @@ const chunks = Object.keys(manifest.files)
   .map((key) => `<script src="${manifest.files[key]}""></script>`) // 스크립트 태그로 변환하고
   .join(''); // 합침
 
-function createPage(root) {
+function createPage(root, stateScript) {
   return `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -39,6 +39,7 @@ function createPage(root) {
     <div id="root">
       ${root}
     </div>
+    ${stateScript}
     <script src="${manifest.files['runtime-main.js']}"></script>
     ${chunks}
     <script src="${manifest.files['main.js']}"></script>
@@ -50,7 +51,7 @@ function createPage(root) {
 const app = express();
 
 // 서버 사이드 렌더링을 처리할 핸들러 함수입니다.
-const serverRender = (req, res, next) => {
+const serverRender = async (req, res, next) => {
   // 이 함수는 404가 떠야 하는 상황에 404를 띄우지 않고 서버사이드 렌더링을 해줍니다.
 
   const context = {};
@@ -78,8 +79,13 @@ const serverRender = (req, res, next) => {
   }
   preloadContext.done = true;
 
-  const root = ReactDOMServer.renderToString(jsx); // 렌더링을 하고
-  res.send(createPage(root)); // 클라이언트에게 결과물을 응답합니다.
+  const root = ReactDOMServer.renderToString(jsx); // 렌더링을 합니다.
+  // JSON을 문자열로 변환하고 악성 스크립트가 실행되는 것을 방지하기 위해 <를 치환처리
+  // https://redux.js.org/recipes/server-rendering#security-considerations
+  const stateString = JSON.stringify(store.getState()).replace(/</g, '\\u003c');
+  const stateScript = `<script>__PRELOADED_STATE__ = ${stateString}</script>`; // 리덕스 초기 상태를 스크립트로 주입합니다.
+
+  res.send(createPage(root, stateScript)); // 클라이언트에게 결과물을 응답합니다.
 };
 
 const serve = express.static(path.resolve('./build'), {
