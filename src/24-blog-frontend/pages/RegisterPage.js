@@ -1,5 +1,12 @@
+import AuthForm from '../compnents/auth/AuthForm';
+import AuthTemplate from '../compnents/auth/AuthTemplate';
+
 const RegisterPage = () => {
-  return <div>회원가입</div>;
+  return (
+    <AuthTemplate>
+      <AuthForm />
+    </AuthTemplate>
+  );
 };
 
 export default RegisterPage;

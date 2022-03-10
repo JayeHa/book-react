@@ -1,5 +1,12 @@
+import AuthForm from '../compnents/auth/AuthForm';
+import AuthTemplate from '../compnents/auth/AuthTemplate';
+
 const LoginPage = () => {
-  return <div>로그인</div>;
+  return (
+    <AuthTemplate>
+      <AuthForm />
+    </AuthTemplate>
+  );
 };
 
 export default LoginPage;
