@@ -1,8 +1,16 @@
 import { Route } from 'react-router-dom';
 import Menu from './20-serverside-rendering/components/Menu';
-import BluePage from './20-serverside-rendering/pages/BluePage';
-import RedPage from './20-serverside-rendering/pages/RedPage';
-import UsersPage from './20-serverside-rendering/pages/UsersPage';
+import loadable from '@loadable/component';
+
+const BluePage = loadable(() =>
+  import('./20-serverside-rendering/pages/BluePage'),
+);
+const RedPage = loadable(() =>
+  import('./20-serverside-rendering/pages/RedPage'),
+);
+const UsersPage = loadable(() =>
+  import('./20-serverside-rendering/pages/UsersPage'),
+);
 
 const App = () => {
   return (
