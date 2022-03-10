@@ -1,16 +1,19 @@
 import { Route } from 'react-router-dom';
-import Menu from './20-serverside-rendering/components/Menu';
-import BluePage from './20-serverside-rendering/pages/BluePage';
-import RedPage from './20-serverside-rendering/pages/RedPage';
+import LoginPage from './24-blog-frontend/pages/LoginPage';
+import PostListPage from './24-blog-frontend/pages/PostListPage';
+import PostPage from './24-blog-frontend/pages/PostPage';
+import RegisterPage from './24-blog-frontend/pages/RegisterPage';
+import WritePage from './24-blog-frontend/pages/WritePage';
 
 const App = () => {
   return (
-    <div>
-      <Menu />
-      <hr />
-      <Route path="/red" component={RedPage} />
-      <Route path="/blue" component={BluePage} />
-    </div>
+    <>
+      <Route component={PostListPage} path={['/@:username', '/']} exact />
+      <Route component={LoginPage} path="/login" />
+      <Route component={RegisterPage} path="/register" />
+      <Route component={WritePage} path="/write" />
+      <Route component={PostPage} path="/@:username/:postId" />
+    </>
   );
 };
 
